@@ -1,0 +1,50 @@
+// allprojects {
+//     repositories {
+//         google()
+//         mavenCentral()
+//     }
+// }
+
+// rootProject.buildDir = "../build"
+// subprojects {
+//     project.buildDir = "${rootProject.buildDir}/${project.name}"
+// }
+// subprojects {
+//     project.evaluationDependsOn(":app")
+// }
+
+// tasks.register("clean", Delete) {
+//     delete rootProject.buildDir
+// }
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Thêm classpath của Google Services plugin tại đây
+        classpath 'com.google.gms:google-services:4.4.2' // Sử dụng phiên bản mới nhất mà bạn cần
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        // Thêm dòng này nếu chưa có
+        maven { url 'https://maven.google.com' }
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(":app")
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
